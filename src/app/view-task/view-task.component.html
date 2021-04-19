@@ -1,0 +1,14 @@
+<div class="container_window">
+    <div class="cw-title-content">
+        <div class="cw-title">
+            <div style="height: 40px; max-width: 40px; min-width: 40px; width: 40px; display: flex; align-items: center; justify-content: center; color: rgba(0,0,0,0.65);">
+                <mat-icon>subtitles</mat-icon>
+            </div>
+            <div class="title" (click)="activeModeEditingTitle()" *ngIf="!editingTitle">{{ model.title }}</div>
+            <input type="text" *ngIf="editingTitle" #inputTitle (focusout)="focusOutTitle()" [(ngModel)]="model.title">
+            <div class="cw-icon-close" (click)="dialogRef.close(null)">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </div>
+        </div>
+    </div>
+</div>

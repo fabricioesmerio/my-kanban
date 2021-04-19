@@ -1,0 +1,66 @@
+<div class="main">
+    <div class="container" cdkDropListGroup>
+        <div class="task" cdkDropList id="{{item.id}}" [cdkDropListData]="item.children"
+            (cdkDropListDropped)="drop($event)" *ngFor="let item of lists; let i = index">
+            
+            <div class="header">
+                
+                <div class="title" *ngIf="editingTitleList == null || editingTitleList != i" (click)="onEditTitleList(i, item)">{{ item.title }}</div>
+                
+                <input type="text" [(ngModel)]="modelList.title" name="title" *ngIf="editingTitleList !== null && editingTitleList == i" 
+                (focusout)="editingTitleList = null; initializeModelList()" #inputEditTitleList (keydown)="listenInputChangeList($event)">
+                
+                <div class="count">{{item.children ? item.children.length : '0'}}</div>
+                <div class="more_options">
+                    <mat-icon aria-hidden="false" aria-label="Mais Opções">more_vert</mat-icon>
+                </div>
+            </div>
+            
+            <div class="body">
+                <div *ngIf="item.children && item.children.length > 0">
+                    <mat-card (click)="openViewTask(card)" *ngFor="let card of item.children; let idx = index" cdkDrag [cdkDragData]="card">
+                        {{ card.title }}
+                    </mat-card>
+                </div>
+                <div>
+                    <mat-card *ngIf="showAddCard && indexListAddCard == i">
+                        <textarea name="add_new_card" [(ngModel)]="modelTask.title" (keydown)="listenInputChangeTask($event)"
+                        placeholder="Insira o texto aqui." #textareaAddCard></textarea>
+                    </mat-card>
+                </div>
+            </div>
+            <div class="footer">
+                <button mat-stroked-button (click)="onChangeNewCard(i); modelTask.listId = item.id" *ngIf="!(showAddCard && indexListAddCard == i)">
+                    <mat-icon>add</mat-icon>
+                    Adicionar Cartão
+                </button>
+                <div *ngIf="showAddCard && indexListAddCard == i" 
+                    style="display: flex; align-items: center; padding: 0px 8px;">
+                    <button class="btn-action" mat-stroked-button style="width: 150px;" >                        
+                        Adicionar Cartão
+                    </button>
+                    <mat-icon (click)="onChangeNewCard(null); ; modelTask.listId = null" style="cursor: pointer; margin-left: 8px;">close</mat-icon>
+                </div>
+            </div>
+        </div>
+        <div class="addListContainer">
+            <div class="addList">
+                <button mat-stroked-button (click)="onChangeShowNewList()" *ngIf="!showAddList">
+                    <mat-icon>add</mat-icon>
+                    Adicionar Lista
+                </button>
+                <div class="box" *ngIf="showAddList">
+                    <div class="box-input">
+                        <input type="text" placeholder="Insira o Título aqui." [(ngModel)]="modelList.title" #inputTitleList (keydown)="listenInputChangeList($event)">
+                    </div>
+                    <div class="box-actions">
+                        <button class="btn-action" mat-stroked-button (click)="saveList()">
+                            Adicionar Lista
+                        </button>
+                        <mat-icon (click)="onChangeShowNewList()">close</mat-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
