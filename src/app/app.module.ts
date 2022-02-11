@@ -11,12 +11,13 @@ import { ActionsBarModule } from './actions-bar/actions-bar.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
+import { AppRoutingModule } from './app-routing.module';
 
 
 
 
 export function migrationFactory() {
-    
+
     return {
         //   1: (db, transaction) => {
         //     const store = transaction.objectStore('people');
@@ -63,6 +64,7 @@ const dbConfig: DBConfig = {
         ToolbarModule,
         MainModule,
         ActionsBarModule,
+        AppRoutingModule,
 
         ToastrModule.forRoot()
     ],
