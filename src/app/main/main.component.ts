@@ -196,7 +196,7 @@ export class MainComponent implements OnInit {
         }
     }
 
-    onEditTitleList(index: number, item: List) {
+    onEditListTitle(index: number, item: List) {
         this.editingTitleList = index;        
         Object.assign(this.modelList, item)
         requestAnimationFrame(_ => {
