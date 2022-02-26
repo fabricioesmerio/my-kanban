@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 export class ListService extends CrudService<List, number> {
 
     constructor(protected _http: HttpClient) {
-        super(_http, `${environment.api.baseUrl}/list`);
+        super(_http, `${environment.api.baseUrl}/List`);
     }
 
 }

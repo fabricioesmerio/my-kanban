@@ -12,7 +12,7 @@ import { Task } from '../shared/models/task.module';
 export class TasktService extends CrudService<Task, number> {
 
     constructor(protected _http: HttpClient) {
-        super(_http, `${environment.api.baseUrl}/task`);
+        super(_http, `${environment.api.baseUrl}/Task`);
     }
 
 }
